@@ -5,10 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Hello</h1>
-    <form method = "POST">
-      {% csrf_token %}
-      <button type = "submit">Log out</button>
-    </form>
+    <h1>Hello {{ request.user.username }}</h1>
+    <a href = "{% url 'logout' %}"><button>Log out</button></a><br>
+    {% for contact in contacts %}
+    <hr>
+    {{ contact.name }}
+    {{ contact.surname }} <br>
+    {{ contact.email }} <br>
+    {{ contact.phone }} <br>
+    {% endfor %}
 </body>
 </html>

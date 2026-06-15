@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.forms import  UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login
+from .models import  Contact
 
 # Create your views here.
 def register_site(request):
@@ -29,9 +30,11 @@ def login_site(request):
     return render(request, 'login.html', {'form': form})
 
 @login_required
+def logout_site(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
 def main_panel(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('register')
-    else:
-        return render(request, 'main_panel.html')
+    contacts = Contact.objects.filter(owner = request.user)
+    return render(request, 'main_panel.html', {'contacts': contacts})
