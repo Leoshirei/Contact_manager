@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    <H1>Hello world!</H1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type = "submit">Register</button>
+    </form>
+    <a href = "{% url 'login' %}"><button>I have account</button></a>
 </body>
 </html>
