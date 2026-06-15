@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Contacts {{ request.user.username }}</title>
 </head>
 <body>
     <h1>Hello {{ request.user.username }}</h1>
-    <a href = "{% url 'logout' %}"><button>Log out</button></a><br>
+    <a href = "{% url 'logout' %}"><button>Log out</button></a>
+    <a href = "{% url 'create_contact' %}"><button>Create contact</button></a>
+    <br>
     {% for contact in contacts %}
     <hr>
     {{ contact.name }}

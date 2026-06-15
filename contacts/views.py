@@ -38,3 +38,15 @@ def logout_site(request):
 def main_panel(request):
     contacts = Contact.objects.filter(owner = request.user)
     return render(request, 'main_panel.html', {'contacts': contacts})
+
+@login_required
+def create_contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        surname = request.POST.get('surname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        contact = Contact.objects.create(owner = request.user, name = name, surname = surname, email = email, phone = phone)
+        contact.save()
+        return redirect('main_panel')
+    return render(request, 'create_contact.html')

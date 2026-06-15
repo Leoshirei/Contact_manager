@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method = "POST">
+        {% csrf_token %}
+        <input name = "name"  type = "text" placeholder = "Enter name">
+        <input name = "surname" type = "text" placeholder = "Enter surname">
+        <input name = "email" type = "email" placeholder = "Enter email">
+        <input name = "phone" type = "text" placeholder = "Enter phone number">
+        <button type = "submit">Save contact</button>
+    </form>
+</body>
+</html>
