@@ -15,6 +15,10 @@
     {{ contact.surname }} <br>
     {{ contact.email }} <br>
     {{ contact.phone }} <br>
+    <form method = "POST" action = "{% url 'delete_contact' contact.id%}">
+        {% csrf_token %}
+        <button type = "submit">Delete contact</button>
+    </form>
     {% endfor %}
 </body>
 </html>

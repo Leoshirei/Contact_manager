@@ -50,3 +50,10 @@ def create_contact(request):
         contact.save()
         return redirect('main_panel')
     return render(request, 'create_contact.html')
+
+@login_required
+def delete_contact(request, contact_id):
+    if request.method == 'POST':
+        contact = Contact.objects.get(id = contact_id, owner = request.user)
+        contact.delete()
+    return redirect('main_panel')
