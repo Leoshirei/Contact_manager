@@ -64,8 +64,8 @@ def update_contact(request, contact_id):
     contact = Contact.objects.get(id=contact_id, owner=request.user)
     form = ContactForm(instance = contact)
     if request.method == 'POST':
+        form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
-            contact.save()
+            form.save()
             return redirect('main_panel')
-    else:
-        return render(request, 'update_contact.html', {'form': form})
+    return render(request, 'update_contact.html', {'form': form})
