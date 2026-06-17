@@ -57,3 +57,16 @@ def delete_contact(request, contact_id):
         contact = Contact.objects.get(id = contact_id, owner = request.user)
         contact.delete()
     return redirect('main_panel')
+
+@login_required
+def update_contact(request, contact_id):
+    contact = Contact.objects.get(id=contact_id, owner=request.user)
+    if request.method == 'POST':
+        contact.name = request.POST.get('name')
+        contact.surname = request.POST.get('surname')
+        contact.email = request.POST.get('email')
+        contact.phone = request.POST.get('phone')
+        contact.save()
+        return redirect('main_panel')
+    else:
+        return render(request, 'update_contact.html', {'contact': contact})
