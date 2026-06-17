@@ -4,6 +4,7 @@ from django.contrib.auth.forms import  UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login
 from .models import  Contact
+from .forms import ContactForm
 
 # Create your views here.
 def register_site(request):
@@ -61,12 +62,10 @@ def delete_contact(request, contact_id):
 @login_required
 def update_contact(request, contact_id):
     contact = Contact.objects.get(id=contact_id, owner=request.user)
+    form = ContactForm(instance = contact)
     if request.method == 'POST':
-        contact.name = request.POST.get('name')
-        contact.surname = request.POST.get('surname')
-        contact.email = request.POST.get('email')
-        contact.phone = request.POST.get('phone')
-        contact.save()
-        return redirect('main_panel')
+        if form.is_valid():
+            contact.save()
+            return redirect('main_panel')
     else:
-        return render(request, 'update_contact.html', {'contact': contact})
+        return render(request, 'update_contact.html', {'form': form})

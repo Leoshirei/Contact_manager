@@ -6,11 +6,11 @@
     </head>
     <body>
         <form method = "POST">
-          {% csrf_token %}
-          <input name = "name"  type = "text" placeholder = "Enter name" value = "{{ contact.name }}">
-          <input name = "surname" type = "text" placeholder = "Enter surname" value = "{{ contact.surname }}">
-          <input name = "email" type = "email" placeholder = "Enter e-mail" value = "{{ contact.email }}">
-          <input name = "phone" type = "text" placeholder = "Enter phone number" value = "{{ contact.phone }}">
+            {% csrf_token %}
+            {{ form.name }}
+            {{ form.surname }}
+            {{form.email}}
+            {{form.phone}}
           <button type = "submit">Save</button>
         </form>
     </body>
