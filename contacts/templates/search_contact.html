@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form method = "POST">
+            {% csrf_token %}
+            <input name = "name" type = "text" placeholder = "Enter name">
+            <button type = "submit">Search contact</button>
+        </form>
+        <a href = "{% url 'main_panel' %}"><button>Return</button></a><br>
+        {% for contact in contacts %}
+            {{ contact.name }}
+            {{ contact.surname }} <br>
+            {{ contact.email }} <br>
+            {{ contact.phone }} <br>
+            <form method = "POST" action = "{% url 'delete_contact' contact.id %}">
+                {% csrf_token %}
+                <button type = "submit">Delete contact</button>
+            </form>
+            <br>
+            <a href = " {% url 'update_contact' contact.id %}"><button>Edit contact</button></a>
+        {% endfor %}
+    </body>
+</html>

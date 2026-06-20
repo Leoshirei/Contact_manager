@@ -61,11 +61,19 @@ def delete_contact(request, contact_id):
 
 @login_required
 def update_contact(request, contact_id):
-    contact = Contact.objects.get(id=contact_id, owner=request.user)
+    contact = Contact.objects.get(id = contact_id, owner = request.user)
     form = ContactForm(instance = contact)
     if request.method == 'POST':
-        form = ContactForm(request.POST, instance=contact)
+        form = ContactForm(request.POST, instance = contact)
         if form.is_valid():
             form.save()
             return redirect('main_panel')
     return render(request, 'update_contact.html', {'form': form})
+
+@login_required
+def search_contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        contacts = Contact.objects.filter(name__icontains = name, owner = request.user)
+        return render(request, 'search_contact.html', context = {'contacts': contacts})
+    return render(request, 'search_contact.html', context ={'contacts': []})
