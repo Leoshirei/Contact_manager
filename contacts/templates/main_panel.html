@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Contacts {{ request.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'contacts/style.css' %}">
 </head>
 <body>
     <h1>Hello {{ request.user.username }}</h1>
